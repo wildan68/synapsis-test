@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ReactQueryProvider } from "@/providers/react-query/provider";
-import { UserConfigProvider } from "./user-config/provider";
+import { UserConfigProvider } from "@/providers/user-config/provider";
 
 export const AppProvider: React.FC<{
     children: React.ReactNode;

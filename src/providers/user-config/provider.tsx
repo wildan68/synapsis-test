@@ -1,32 +1,37 @@
-"use client"
 import { setAuthorizationToken } from "@/lib/api";
-import React from "react";
+import { getCookie } from "@/lib/cookies";
+import React, { useCallback } from "react";
 
-const UserConfigContext = React.createContext({
-  token: "",
+export const UserConfigContext = React.createContext({
+  isLoggedIn: false,
+  token: ""
 })
 
-export const UserConfigProvider: React.FC<{
-  children: React.ReactNode;
-}> = ({ children }) => {
-  const getTokenLocalStorage = (): string => {
-    const token = localStorage.getItem("token")
-    return token || ""
-  }
-  if (!getTokenLocalStorage()) {
-    window.location.href = "/login"
-  }
-
-  if (getTokenLocalStorage()) {
-    setAuthorizationToken(getTokenLocalStorage())
-    window.location.href = "/dashboard"
-  }
+export function UserConfigProvider({ children }: React.PropsWithChildren) {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+  const [token, setToken] = React.useState("")
   
-  return (
-    <React.Fragment>
-      {children}
-    </React.Fragment>
-  )
-}
+  const getToken = useCallback(async () => {
+    const token = await getCookie("token")
 
-export const useUserConfig = () => React.useContext(UserConfigContext);
+    return token
+  }, [])
+
+  React.useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setIsLoggedIn(true)
+        setToken(token)
+        setAuthorizationToken(token);
+      }
+    })
+  }, [getToken])
+
+  return (
+    <UserConfigContext.Provider value={{ isLoggedIn, token }}>
+      <React.Fragment>
+        {children}
+      </React.Fragment>
+    </UserConfigContext.Provider>
+  );
+}

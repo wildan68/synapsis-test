@@ -3,7 +3,7 @@
 import React from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { queryClientConfig } from "@/providers/react-query/client";
+import { queryClientConfig } from "@/providers/react-query/entity";
 
 export function ReactQueryProvider({ children }: React.PropsWithChildren) {
   const [client] = React.useState(queryClientConfig);

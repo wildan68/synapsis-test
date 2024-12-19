@@ -2,6 +2,6 @@
 
 export const DashboardContainer = () => {
   return (
-    <div>Dashboard</div>
+    <div>Welcom to the club!</div>
   )
 }

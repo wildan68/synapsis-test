@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 const api: AxiosInstance = axios.create({
-  baseURL: "https://gorest.co.in/public-api",
+  baseURL: "https://gorest.co.in/public/v2",
   headers: {
     'Content-Type': 'application/json',
   },

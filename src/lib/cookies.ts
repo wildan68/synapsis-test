@@ -26,7 +26,6 @@ export const setCookie = async (key: string, data: string, parse: boolean = fals
   const value = parse ? JSON.stringify(data) : data;
 
   if (typeof window !== "undefined") {
-    console.log('value', value)
     ClientCookies.setCookie(key, value);
   } else {
     const { cookies: ServerCookies } = await import("next/headers");

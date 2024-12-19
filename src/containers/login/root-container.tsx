@@ -27,6 +27,7 @@ export const LoginContainer = () => {
 
       setCookie("token", token)
       setAuthorizationToken(token)
+      window.location.href = "/dashboard"
       return message.success("Success Login")
     },
     onError(error: any) {

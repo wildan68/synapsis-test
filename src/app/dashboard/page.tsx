@@ -4,10 +4,10 @@ import React from "react"
 
 const DashboardContainer = dynamic(() => import("@/containers/dashboard/root-container").then(mod => mod.DashboardContainer), { ssr: false })
 
-export const LoginPage = () => {
+export const DashboardPage = () => {
   return (
     <DashboardContainer />
   )
 }
 
-export default LoginPage
+export default DashboardPage

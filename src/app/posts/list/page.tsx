@@ -4,7 +4,7 @@ import React from "react"
 
 const PostListContainer = dynamic(() => import("@/containers/post/root-container").then(mod => mod.PostListContainer), { ssr: false })
 
-export const PostListPage = () => {
+const PostListPage = () => {
   return (
     <PostListContainer />
   )

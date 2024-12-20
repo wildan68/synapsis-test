@@ -4,7 +4,7 @@ import React from "react"
 
 const PostCreateContainer = dynamic(() => import("@/containers/post/root-container").then(mod => mod.PostCreateContainer), { ssr: false })
 
-export const PostCreatePage = () => {
+const PostCreatePage = () => {
   return (
     <PostCreateContainer />
   )

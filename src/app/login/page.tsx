@@ -4,7 +4,7 @@ import React from "react"
 
 const LoginContainer = dynamic(() => import("@/containers/login/root-container").then(mod => mod.LoginContainer), { ssr: false })
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <LoginContainer />
   )

@@ -2,7 +2,7 @@
 import { UserConfigContext } from "@/providers/user-config/provider"
 import React from "react"
 
-export const MainPage = () => {
+const MainPage = () => {
   const { isLoggedIn } = React.useContext(UserConfigContext)
 
   if (isLoggedIn) {

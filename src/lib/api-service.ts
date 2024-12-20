@@ -9,8 +9,8 @@ export const ApiService = {
     key: "get-user",
   },
   getPosts: {
-    call: (userId: number) => {
-      return api.get<IPost[]>(`/users/${userId}/posts`)
+    call: (userId: number, params?: any) => {
+      return api.get<IPost[]>(`/users/${userId}/posts`, { params })
     },
     key: "get-posts",
   },

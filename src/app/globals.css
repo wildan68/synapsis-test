@@ -4,3 +4,12 @@
 }
 @tailwind components;
 @tailwind utilities;
+
+@layer antd {
+  @import 'antd/dist/antd.css';
+}
+
+:root {
+  --backgroud: #fff;
+  --text: #000;
+}

@@ -81,11 +81,20 @@ export const PostListContainer = () => {
   const router = useRouter()
   const [deleteDialog, setDeleteDialog] = React.useState<boolean>(false)
   const [dataDialog, setDataDialog] = React.useState<IPost>()
+  const [filters, setFilters] = React.useState<{
+    page: number
+    per_page: number
+  }>({
+    page: 1,
+    per_page: 10,
+  })
 
   const { data, isLoading } = useQuery(
     {
-      queryKey: [ApiService.getPosts.key],
-      queryFn: async () => (await ApiService.getPosts.call(userId as number)),
+      queryKey: [ApiService.getPosts.key, {...filters}],
+      queryFn: async () => (await ApiService.getPosts.call(userId as number, {
+        ...filters
+      })),
       throwOnError: true
     }
   )
@@ -100,6 +109,7 @@ export const PostListContainer = () => {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      width: 300
     }, {
       title: "Body",
       dataIndex: "body",
@@ -153,7 +163,8 @@ export const PostListContainer = () => {
   }, [data])
 
   const handleNewPage = ({ current }: TablePaginationConfig) => {
-    refetchQueries(ApiService.getPost.key)
+    setFilters({ ...filters, page: current as number })
+    refetchQueries(ApiService.getPosts.key)
   }
 
   React.useEffect(() => {

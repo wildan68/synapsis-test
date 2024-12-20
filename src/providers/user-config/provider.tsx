@@ -18,6 +18,7 @@ export const UserConfigContext = React.createContext<{
 export function UserConfigProvider({ children }: React.PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
   const [userId, setUserId] = React.useState<number | null>(null)
+  const [name, setName] = React.useState("")
   const [token, setToken] = React.useState("")
   const { setAuthLayout } = useAuthLayout()
   

@@ -40,7 +40,7 @@ export const FieldPostContainer: React.FC<{
       return message.success(id ? "Post Updated Successfully" : "Post Created Successfully")
     },
     onError(error: any) {
-      message.error(error.message)
+      message.error(error.response.data.message)
     }
   })
 

@@ -1,3 +1,8 @@
+export type IPayloadLogin = {
+  name: string
+  token: string
+}
+
 export type IPost = {
   id: number
   body: string

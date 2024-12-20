@@ -6,6 +6,7 @@ import { UserConfigProvider } from "@/providers/user-config/provider";
 import { AuthLayoutProvider, useAuthLayout } from "@/providers/layouts/provider";
 import { AuthLayout } from "@/layouts/auth";
 import { DefaultLayout } from "@/layouts/default";
+import { ThemeProvider } from "@/providers/theme/provider";
 
 const AppContent: React.FC<{
   children: React.ReactNode
@@ -26,15 +27,17 @@ export const AppProvider: React.FC<{
 }> = ({ children }) => {
   return (
     <React.Fragment>
-      <AuthLayoutProvider>
-        <UserConfigProvider>
-          <ReactQueryProvider>
-            <AppContent>
-              {children}
-            </AppContent>
-          </ReactQueryProvider>
-        </UserConfigProvider>
-      </AuthLayoutProvider>
+      <ThemeProvider>
+        <AuthLayoutProvider>
+          <UserConfigProvider>
+            <ReactQueryProvider>
+              <AppContent>
+                {children}
+              </AppContent>
+            </ReactQueryProvider>
+          </UserConfigProvider>
+        </AuthLayoutProvider>
+      </ThemeProvider>
     </React.Fragment>
   )
 }

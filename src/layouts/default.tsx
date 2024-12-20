@@ -2,9 +2,10 @@
 import React, { ReactNode } from "react";
 import type { MenuProps } from 'antd';
 import { Menu, Switch } from 'antd';
-import { DashboardOutlined, PlusOutlined } from "@ant-design/icons";
+import { DashboardOutlined, LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import { useRouter, usePathname } from "next/navigation";
 import { ThemeConfigContext } from "@/providers/theme/provider";
+import { UserConfigContext } from "@/providers/user-config/provider";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -23,12 +24,18 @@ const items: MenuItem[] = [
       { label: 'List Post', key: '/posts/list' },
     ],
   },
+  {
+    label: 'Logout',
+    key: 'logout',
+    icon: <LogoutOutlined />,
+  }
 ];
 
 export const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter()
   const pathname = usePathname()
   const [current, setCurrent] = React.useState(pathname)
+  const { onLogout } = React.useContext(UserConfigContext)
   const { setDarkMode, darkMode } = React.useContext(ThemeConfigContext)
   const getDeviceResolution = React.useCallback(() => {
     if (typeof window !== "undefined") {
@@ -42,6 +49,10 @@ export const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) =
   }, [getDeviceResolution])
 
   const onClick: MenuProps['onClick'] = (e) => {
+    if (e.key === 'logout') {
+      return onLogout()
+    }
+    
     router.push(e.key)
     setCurrent(e.key);
   };

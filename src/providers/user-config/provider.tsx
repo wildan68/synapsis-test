@@ -1,7 +1,7 @@
 "use client"
 
 import { setAuthorizationToken } from "@/lib/api";
-import { getCookie } from "@/lib/cookies";
+import { deleteCookie, getCookie, setCookie } from "@/lib/cookies";
 import React, { useCallback } from "react";
 import { useAuthLayout } from "@/providers/layouts/provider";
 
@@ -9,11 +9,13 @@ export const UserConfigContext = React.createContext<{
   isLoggedIn: boolean, 
   token: string,
   userId: number | null
-}>({
-  isLoggedIn: false,
-  token: "",
-  userId: null
-})
+  onLogout: () => void
+    }>({
+      isLoggedIn: false,
+      token: "",
+      userId: null,
+      onLogout: () => {}
+    })
 
 export function UserConfigProvider({ children }: React.PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
@@ -28,6 +30,13 @@ export function UserConfigProvider({ children }: React.PropsWithChildren) {
     return token
   }, [])
 
+  const onLogout = () => {
+    setIsLoggedIn(false)
+    setToken("")
+    deleteCookie("token")
+    window.location.href = "/login"
+  }
+
   React.useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -41,7 +50,7 @@ export function UserConfigProvider({ children }: React.PropsWithChildren) {
   }, [getToken, setAuthLayout, isLoggedIn])
 
   return (
-    <UserConfigContext.Provider value={{ isLoggedIn, token, userId }}>
+    <UserConfigContext.Provider value={{ isLoggedIn, token, userId, onLogout }}>
       <React.Fragment>
         {children}
       </React.Fragment>

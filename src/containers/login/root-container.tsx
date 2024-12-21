@@ -35,7 +35,7 @@ export const LoginContainer = () => {
   return (
     <React.Fragment>
       <main className="flex min-h-screen flex-col items-center justify-center">
-        <Card className="min-w-[90%] lg:min-w-[30%]" title="Welcome">
+        <Card className="w-[90%] lg:w-[30%]" title="Welcome">
           <Form
             form={form}
             layout="vertical"
@@ -67,6 +67,14 @@ export const LoginContainer = () => {
               Login
               </Button>
             </Form.Item>
+
+            <Card 
+              title="Example Token"
+              type="inner"
+              className="break-all"
+            >
+              1e35771224c44871f3f89207bd39faf1f43ad20e8f4b95b93eaf8de0526d8432
+            </Card>
           </Form>
         </Card>
       </main>

@@ -44,7 +44,7 @@ export function UserConfigProvider({ children }: React.PropsWithChildren) {
         setToken(token)
         setAuthorizationToken(token);
         setAuthLayout(false)
-        setUserId(7591023)
+        setUserId(7599456)
       }
     })
   }, [getToken, setAuthLayout, isLoggedIn])
